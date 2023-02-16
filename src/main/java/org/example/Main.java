@@ -21,14 +21,14 @@ public class Main {
         }
 
         while (true) {
-            String menuOption = inputDataHandler.valueFromUser(menuOptions);
+            String menuOptionFromUser = inputDataHandler.valueFromUserHandler(menuOptions);
 
-            if ("4".equals(menuOption)) {
+            if ("4".equals(menuOptionFromUser)) {
                 break;
             }
 
             try {
-                appMenuService.menu(Integer.parseInt(menuOption));
+                appMenuService.menuAction(Integer.parseInt(menuOptionFromUser));
             } catch (NumberFormatException e) {
                 System.out.println("Option not available. Please try again");
             }

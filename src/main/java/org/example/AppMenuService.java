@@ -2,7 +2,7 @@ package org.example;
 
 public class AppMenuService {
 
-    public void menu(int menuOption) {
+    public void menuAction(int menuOption) {
         Company company = new Company();
         EmployeeService employeeService = new EmployeeService();
 

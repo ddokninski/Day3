@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class InputDataHandler {
 
-    public String valueFromUser(String valueToShow) {
+    public String valueFromUserHandler(String valueToShow) {
         try {
             Scanner scanner = new Scanner(System.in);
             String valueFromUser;
