@@ -13,7 +13,7 @@ public class Main {
                 3 – Add new employee
 
                 4 – End program""";
-        int employeesHandlerCounter = 1;
+        int employeesHandlerCounter = 5;
 
         while (employeesHandlerCounter >= 1) {
             employeeService.addEmployee();
