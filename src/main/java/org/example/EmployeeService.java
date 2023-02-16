@@ -1,6 +1,6 @@
 package org.example;
 
-public class AddEmployee {
+public class EmployeeService {
 
     InputDataHandler inputDataHandler = new InputDataHandler();
     Company company = new Company();

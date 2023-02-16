@@ -1,63 +1,37 @@
 package org.example;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Main {
     public static void main(String[] args) {
-        AddEmployee addEmployee = new AddEmployee();
+        EmployeeService employeeService = new EmployeeService();
         InputDataHandler inputDataHandler = new InputDataHandler();
-        Company company = new Company();
+        AppMenuService appMenuService = new AppMenuService();
+        String menuOptions = """
+                1 – Print sum of all employees salary
+
+                2 – Display all employees data
+
+                3 – Add new employee
+
+                4 – End program""";
         int employeesHandlerCounter = 1;
 
         while (employeesHandlerCounter >= 1) {
-            addEmployee.addEmployee();
+            employeeService.addEmployee();
             employeesHandlerCounter--;
         }
 
         while (true) {
-            String menuOption = inputDataHandler.valueFromUser(menu());
-            boolean correctMenuOptionFromUserFlag = checkMenuValueFromUser(menuOption);
+            String menuOption = inputDataHandler.valueFromUser(menuOptions);
 
-            if (correctMenuOptionFromUserFlag) {
+            if ("4".equals(menuOption)) {
+                break;
+            }
 
-                if (Integer.parseInt(menuOption) == 4) {
-                    break;
-                }
-
-                switch (Integer.parseInt(menuOption)) {
-                    case 1:
-                        System.out.println("Sum of salary: " + company.getSumOfSalary(company.getEmployeeList()));
-                        break;
-                    case 2:
-                        System.out.println(company.getEmployeeList());
-                        break;
-                    case 3:
-                        addEmployee.addEmployee();
-                        break;
-                    case 4:
-                        break;
-                }
+            try {
+                appMenuService.menu(Integer.parseInt(menuOption));
+            } catch (NumberFormatException e) {
+                System.out.println("Option not available. Please try again");
             }
         }
     }
-
-    private static String menu() {
-        return "1 – Print sum of all employees salary\n" +
-                "\n" +
-                "2 – Display all employees data\n" +
-                "\n" +
-                "3 – Add new employee\n" +
-                "\n" +
-                "4 – End program";
-    }
-
-    private static boolean checkMenuValueFromUser(String valueFromUser) {
-        Pattern pattern = Pattern.compile("(1)|(2)|(3)|(4)");
-        valueFromUser = valueFromUser.trim();
-        Matcher matcher = pattern.matcher(valueFromUser);
-
-        return matcher.matches();
-    }
-
 }
