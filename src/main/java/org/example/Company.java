@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Company {
 
-    private static final List<Employee> employeeList = new ArrayList<>();
+    private List<Employee> employeeList = new ArrayList<>();
 
     public void addEmployeeToList(Employee employee) {
         employeeList.add(employee);
@@ -16,10 +16,6 @@ public class Company {
     }
 
     public double getSumOfSalary(List<Employee> employeeList) {
-        double sumOfSalary = 0;
-        for (Employee employee : employeeList) {
-            sumOfSalary += employee.getSalary();
-        }
-        return sumOfSalary;
+        return employeeList.stream().mapToDouble(Employee::getSalary).sum();
     }
 }

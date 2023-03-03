@@ -1,11 +1,7 @@
 package org.example;
 
 public class Main {
-    public static void main(String[] args) {
-        EmployeeService employeeService = new EmployeeService();
-        InputDataHandler inputDataHandler = new InputDataHandler();
-        AppMenuService appMenuService = new AppMenuService();
-        String menuOptions = """
+    private final static String menuOptions = """
                 1 – Print sum of all employees salary
 
                 2 – Display all employees data
@@ -14,21 +10,22 @@ public class Main {
 
                 4 – End program""";
 
-        for (int i = 0; i < 5; i++) {
+    public static void main(String[] args) {
+        Company company = new Company();
+
+        InputDataHandler inputDataHandler = new InputDataHandler();
+        EmployeeService employeeService = new EmployeeService(inputDataHandler, company);
+
+        for (int i = 0; i < 1; i++) {
             employeeService.addEmployee();
         }
 
         while (true) {
-            String menuOptionFromUser = inputDataHandler.valueFromUserHandler(menuOptions);
-
-            if ("4".equals(menuOptionFromUser)) {
-                break;
-            }
-
-            try {
-                appMenuService.menuAction(Integer.parseInt(menuOptionFromUser));
-            } catch (NumberFormatException e) {
-                System.out.println("Option not available. Please try again");
+            switch (inputDataHandler.getIntFromUser(menuOptions)) {
+                case 1 -> System.out.println("Sum of salary: " + company.getSumOfSalary(company.getEmployeeList()));
+                case 2 -> System.out.println(company.getEmployeeList());
+                case 3 -> employeeService.addEmployee();
+                case 4 -> System.exit(0);
             }
         }
     }

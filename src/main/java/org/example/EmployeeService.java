@@ -1,21 +1,24 @@
 package org.example;
 
 public class EmployeeService {
+    InputDataHandler inputDataHandler;
+    Company company;
 
-    InputDataHandler inputDataHandler = new InputDataHandler();
-    Company company = new Company();
+    public EmployeeService(InputDataHandler inputDataHandler, Company company) {
+        this.inputDataHandler = inputDataHandler;
+        this.company = company;
+    }
 
     public void addEmployee() {
-        try {
-            String firstName = inputDataHandler.valueFromUserHandler("Employee first name: ");
-            String lastName = inputDataHandler.valueFromUserHandler("Employee last name: ");
-            double salary = Double.parseDouble(inputDataHandler.valueFromUserHandler("Employee salary: "));
-            Employee employee = new Employee(firstName, lastName, salary);
-            company.addEmployeeToList(employee);
-        } catch (NumberFormatException e) {
-            System.out.println("Incorrect employee data. Please enter them again");
-            addEmployee();
-        }
+        double salary = 0;
+
+            String firstName = inputDataHandler.getTextFromUser("Employee first name: ");
+            String lastName = inputDataHandler.getTextFromUser("Employee last name: ");
+            while(salary == 0) {
+                salary = inputDataHandler.getDoubleFromUser("Employee salary: ");
+            }
+
+            company.addEmployeeToList(new Employee(firstName, lastName, salary));
     }
 
 }
